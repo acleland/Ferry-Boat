@@ -86,7 +86,7 @@ int main (){
    	}
 
    	if (!done){
-   		printf("No arrangement possible that satisfies the 2% criteria.\n")
+   		printf("No arrangement possible that satisfies the 2% criteria.\n");
    		exit(0);
    	}
 
