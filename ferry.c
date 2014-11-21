@@ -85,6 +85,11 @@ int main (){
    		}
    	}
 
+   	if (!done){
+   		printf("No arrangement possible that satisfies the 2% criteria.\n")
+   		exit(0);
+   	}
+
    	// Parse partitions and print indices of vehicles allocated to left side
    	for (int k = 0; k < 64; k++) {
    	   	if ((partition_j >> k) & 1) {
