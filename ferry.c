@@ -24,15 +24,15 @@ int main (){
     double sum_right = 0;
     double total_weight, accept;
 
-
+    // Read number of vehicles to load
     fscanf(f1, "%d", &num);
 
-    //weights = (double*)(malloc(sizeof(double) * num));
-    
+    // Read the weights of the vehicles
     for (int i = 0; i < num; i++){
         fscanf(f1, "%lf", &weights[i]);
     }
 
+    // Print the weights - might want to comment this out later.
     for (int i = 0; i < num; i++){
         printf("%lf\n", weights[i]);
     }
@@ -52,16 +52,17 @@ int main (){
    	lo = ((biggie) ~0);
    	hi = ((biggie) 1) << diff;
 
-   	biggie i, j;
+   	biggie partition_i, partition_j;
+   	double difference;
    	// Loop until sun goes supernova * 2000 in worst case
-   	for (i = 0; i < hi; i++) {
-   		for (j = 0; j < lo; j++) {
+   	for (partition_i = 0; partition_i < hi; partition_i++) {
+   		for (partition_j = 0; partition_j < lo; partition_j++) {
    			for (int k = 0; k < 64; k++) {
-   				if ((j >> k) & 1) {
+   				if ((partition_j >> k) & 1) {
    					sum_left += weights[k];
    				}
-   				if (i > 0) {
-   					if ((i >> k) & 1) {
+   				if (partition_i > 0) {
+   					if ((partition_i >> k) & 1) {
    						sum_left += weights[k + 64];
    					}
    				}
@@ -70,10 +71,32 @@ int main (){
    			// Check to see if sum of left side within 2% of sum of right side
    			sum_right = total_weight - sum_left;
    			accept = (0.02 * sum_right);
-
+   			difference = sum_left - sum_right;
+   			if (difference < 0){
+   				difference *= -1;
+   			}
+   			if (difference <= accept){
+   				done = 1;
+   				break;
+   			}
+   		}
+   		if (done == 1){
+   			break;
    		}
    	}
 
+   	// Parse partitions and print indices of vehicles allocated to left side
+   	for (int k = 0; k < 64; k++) {
+   	   	if ((partition_j >> k) & 1) {
+   	   		printf("%d ", k);
+ 	   	}
+   	   	if (partition_i > 0) {
+   	   		if ((partition_i >> k) & 1) {
+   	   			printf("%d ", k);
+   	   		}
+   	   	}
+   	}
+   	printf("\n");
 
     return 0;
 }
