@@ -52,13 +52,14 @@ int main (){
     	lo = 1 << num;
     }
    	hi = ((biggie) 1) << diff;
-   	printf("hi = %llu, lo = %llu\n", hi, lo);
+   	//printf("hi = %llu, lo = %llu\n", hi, lo);
 
    	biggie partition_i, partition_j;
    	double difference;
    	// Loop until sun goes supernova * 2000 in worst case
    	for (partition_i = 0; partition_i < hi; partition_i++) {
    		for (partition_j = 0; partition_j < lo; partition_j++) {
+   			sum_left = 0;
    			for (int k = 0; k < 64; k++) {
    				if ((partition_j >> k) & 1) {
    					sum_left += weights[k];
@@ -92,14 +93,14 @@ int main (){
    		exit(0);
    	}
 
-   	// Parse partitions and print indices of vehicles allocated to left side
+   	// Parse partitions and print indices of vehicles allocated to left side. (index by 1)
    	for (int k = 0; k < 64; k++) {
    	   	if ((partition_j >> k) & 1) {
-   	   		printf("%d ", k);
+   	   		printf("%d ", k+1);
  	   	}
    	   	if (partition_i > 0) {
    	   		if ((partition_i >> k) & 1) {
-   	   			printf("%d ", k);
+   	   			printf("%d ", k+1);
    	   		}
    	   	}
    	}
