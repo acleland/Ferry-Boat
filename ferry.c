@@ -49,7 +49,7 @@ int main (){
     if (num > 64) {
     	diff = num - 64;
     } else {
-    	lo >>= (64 - num);
+    	lo = 1 << num;
     }
    	hi = ((biggie) 1) << diff;
    	printf("hi = %llu, lo = %llu\n", hi, lo);
