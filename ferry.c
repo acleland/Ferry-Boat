@@ -89,7 +89,7 @@ int main (){
    	}
 
    	if (!done){
-   		printf("No arrangement possible that satisfies the 2%% criteria.\n");
+   		printf("No arrangement possible that satisfies the 2\% criteria.\n");
    		exit(0);
    	}
 
@@ -98,9 +98,11 @@ int main (){
    	   	if ((partition_j >> k) & 1) {
    	   		printf("%d ", k+1);
  	   	}
+   	   	// partition i represents the set of vehicles in positions
+   	   	// 65+ in the array, thus add 65.
    	   	if (partition_i > 0) {
    	   		if ((partition_i >> k) & 1) {
-   	   			printf("%d ", k+1);
+   	   			printf("%d ", k + 65);
    	   		}
    	   	}
    	}
