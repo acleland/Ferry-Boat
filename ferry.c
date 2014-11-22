@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 typedef unsigned long long int biggie;
 
@@ -43,14 +44,15 @@ int main (){
     total_weight = sumWeights(num, weights);
 
     // Create numbers to iterate through to generate partitions
-    int diff;
+    int diff = 0;
+    lo = ~0;
     if (num > 64) {
     	diff = num - 64;
     } else {
-    	diff = 0;
+    	lo >>= (64 - num);
     }
-   	lo = ((biggie) ~0);
    	hi = ((biggie) 1) << diff;
+   	printf("hi = %llu, lo = %llu\n", hi, lo);
 
    	biggie partition_i, partition_j;
    	double difference;
@@ -86,7 +88,7 @@ int main (){
    	}
 
    	if (!done){
-   		printf("No arrangement possible that satisfies the 2% criteria.\n");
+   		printf("No arrangement possible that satisfies the 2%% criteria.\n");
    		exit(0);
    	}
 
